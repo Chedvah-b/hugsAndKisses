@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express=require("express");
 const app=express();
 const cors=require("cors");
@@ -7,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 //Get all items
-app.get("/",async(req,res)=>{
+app.get("/list",async(req,res)=>{
     try {
         const results = await db.query("SELECT * FROM item ORDER BY name");
         res.status(200).json({

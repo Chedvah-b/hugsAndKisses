@@ -1,8 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { ItemsContext } from "../context/ItemsContext";
+
+
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const CheckOut=()=>{
     const {total,getTotal}=useContext(ItemsContext);
+    const [firstName,setFirstName]=useState("");
+    const [lastName,setLastName]=useState("");
+    
+    const [phone,setPhone]=useState("");
+    const [email,setEmail]=useState("");
+    const [password,setPassword]=useState("");
     return(
         <div>
             {total}
@@ -17,37 +30,7 @@ const CheckOut=()=>{
                         <Form.Control onBlur={(e)=>{setLastName(e.target.value)}} required type="text" placeholder="Last Name" />
                     </Form.Group>
 
-                    <Form.Group className="mb-3">
-                        <Form.Label>Date of Birth</Form.Label>
-                        <Row className="g-3">
-                        <Col md>
-                        <Form.Select onBlur={(e)=>{setDateOfBirthD(e.target.value)}} aria-label="Default select example">
-                            {day.map(d=>(
-                                <option key={d} value={d}>{d}</option>
-                            ))}
-                            <option>Day</option>
-                            </Form.Select>
-                        </Col>
-                        <Col md>
-                        <Form.Select onBlur={(e)=>{setDateOfBirthM(e.target.value)}} aria-label="Default select example">
-                            {month.map(m=>(
-                                    <option key={m} value={m}>{m}</option>
-                                ))}
-                            
-                            </Form.Select>
-                        </Col>
-                        <Col md>
-                            
-                            <Form.Select onBlur={(e)=>{setDateOfBirthY(e.target.value)}} aria-label="Floating label select example">
-                            {year.map(y=>(
-                                <option key={y} value={y}>{y}</option>
-                            ))}
-                            
-                            </Form.Select>
-                            
-                        </Col>
-                    </Row>
-                    </Form.Group>
+                   
 
                     <Form.Group className="mb-3">
                         <Form.Label>Phone</Form.Label>
