@@ -6,14 +6,17 @@ import { ItemsContext } from "../context/ItemsContext";
 const ItemDetailPage=()=>{
     const {id}=useParams();
     const {selectedItem,setSelectedItem}=useContext(ItemsContext);
+    const {total,setTotal}=useContext(ItemsContext);
 
     const addToBag=()=>{
+        
         var key={id}.id;
         if(JSON.parse(localStorage.getItem(key))){
             var item = JSON.parse(localStorage.getItem(key)).amount;
+            setTotal(prev=>prev+selectedItem.price);
             localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":item+1,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
-        else{
+        else{setTotal(selectedItem.price);
             localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":1,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
   
@@ -36,6 +39,7 @@ const ItemDetailPage=()=>{
     },[])
     return(
         <div className="item ">
+            {console.log("item"+total)}
             <img className="item-image" src={selectedItem.picture} alt=""/>
             <div className="item-information">
                 <h1>

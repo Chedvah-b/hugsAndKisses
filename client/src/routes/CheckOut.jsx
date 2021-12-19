@@ -1,25 +1,29 @@
-import React, { useContext,useState } from "react";
+import React, { useContext,useEffect,useState } from "react";
 import { ItemsContext } from "../context/ItemsContext";
 
 
 import Button from "react-bootstrap/Button";
-import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
 
 const CheckOut=()=>{
-    const {total,getTotal}=useContext(ItemsContext);
+    const {total,setTotal}=useContext(ItemsContext);
     const [firstName,setFirstName]=useState("");
     const [lastName,setLastName]=useState("");
     
     const [phone,setPhone]=useState("");
     const [email,setEmail]=useState("");
-    const [password,setPassword]=useState("");
+    const [address,setAddress]=useState("");
+    const [cardNumber,setCardNumber]=useState("");
+   
+    useEffect(()=>{
+        console.log(total);
+    },[])
     return(
-        <div>
+        <div className="container">
             {total}
             <Form>
+                <h5>Billing address</h5>
                     <Form.Group className="mb-3">
                         <Form.Label>First Name</Form.Label>
                         <Form.Control onBlur={(e)=>{setFirstName(e.target.value)}} required type="text" placeholder="First Name" />
@@ -39,26 +43,22 @@ const CheckOut=()=>{
 
                     <Form.Group className="mb-3">
                         <Form.Label>email</Form.Label>
-                        <Form.Control onBlur={(e)=>{setEmail(e.target.value)}} required type="email" />
+                        <Form.Control onBlur={(e)=>{setEmail(e.target.value)}} required type="email" placeholder="email"/>
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <Form.Label>Confirm email</Form.Label>
-                        <Form.Control onBlur={(e)=>{if(e.target.value!==email){console.log("error")}}} required type="email" />
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control onBlur={(e)=>{setAddress(e.target.value)}} required type="text" placeholder="Address" />
                     </Form.Group>
+                    <h5>Payment</h5>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Card number</Form.Label>
+                        <Form.Control onBlur={(e)=>{setCardNumber(e.target.value)}} required type="text" placeholder="Card number" />
+                    </Form.Group>
+
+
                     
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control onBlur={(e)=>{setPassword(e.target.value)}} required type="password" />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control required type="password" />
-                    </Form.Group>
-                    
-                    <Button onClick={()=>{console.log(firstName)}} variant="primary" type="submit">
+                    <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>

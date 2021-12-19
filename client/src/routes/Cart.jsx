@@ -7,7 +7,8 @@ import { ItemsContext } from "../context/ItemsContext";
 const Cart=()=>{
     const [LS, setLS] = useState([]);
     //const [a,seta]=useState([]);
-    const {total,getTotal}=useContext(ItemsContext);
+    
+    const {total}=useContext(ItemsContext);
     
 
 useEffect(() => {
@@ -20,9 +21,10 @@ useEffect(() => {
     //tempArr.push(key);
     tempArr.push(JSON.parse(localStorage.getItem(key)));
   }*/
-  getTotal(totalAmount);
-   setLS(tempArr);
    
+   setLS(tempArr);
+   //setTotal(totalAmount());
+   //console.log(total);
 
 },[])
 
@@ -36,9 +38,10 @@ const removeItem=(id)=>{
 }
 
 
-const totalAmount = LS.reduce(
+function totalAmount(){ return LS.reduce(
     (previousAmount, currentAmount)=>previousAmount+(currentAmount.price*currentAmount.amount), 
     0);
+}
 
 /*useEffect(async()=>{
     const temp=[]
@@ -61,6 +64,7 @@ return(
    
    
        <div className="container">
+           {console.log("cart",total)}
            <Table  bordered >
             <thead>
                 <tr>
@@ -93,8 +97,8 @@ return(
                 
             </tbody>
             </Table>
-                        <h1>Total: {totalAmount}</h1>
-            <Button total={totalAmount} href="/check-out">go to check out</Button>
+                        <h1>Total: {total}</h1>
+            <Button href="/check-out">go to check out</Button>
             
        </div>
    
