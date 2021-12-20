@@ -36,10 +36,10 @@ const Navigator=()=>{
         <nav key="1" className="navbar sticky-top bg-white navbar-light">
             <div key="2" className="container-fluid">
                 <div>
-                    <a className="navbar-brand" href="/">
+                    <Link className="navbar-brand" to="/">
                         <img src="https://i.ibb.co/jWRB1gJ/logo.png" alt="logo" border="0"/>
-                    </a>
-                    <a className="navbar-brand" href="/">Home</a>
+                    </Link>
+                    <Link className="navbar-brand" to="/">Home</Link>
                 </div>
                 
                 
