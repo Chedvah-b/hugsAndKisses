@@ -2,6 +2,7 @@ import React,{useContext, useEffect, useState} from "react";
 import LogIn from "./LogIn";
 import { ItemsContext } from "../context/ItemsContext";
 import SignUp from "./SignUp";
+import {Link} from "react-router-dom";
 
 
 const Navigator=()=>{
@@ -45,9 +46,9 @@ const Navigator=()=>{
 
                 <div key="3" className="d-flex justify-content-evenly align-items-center">
         
-                    <a className="navbar-brand ms-2" href="/cart">
+                    <Link className="navbar-brand ms-2" to="/cart">
                         <img width="30px" src="https://i.ibb.co/gj6GX58/shopping-bag.png" alt="shopping-bag" border="0" />
-                    </a>
+                    </Link>
                 </div>                
                 
             </div>

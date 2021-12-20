@@ -2,7 +2,7 @@ import React,{useEffect, useState, useContext} from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { ItemsContext } from "../context/ItemsContext";
-
+import {Link} from "react-router-dom";
 
 const Cart=()=>{
     const [LS, setLS] = useState([]);
@@ -98,7 +98,7 @@ return(
             </tbody>
             </Table>
                         <h1>Total: {total}</h1>
-            <Button href="/check-out">go to check out</Button>
+            <Link to="/check-out"><Button>go to check out</Button></Link>
             
        </div>
    

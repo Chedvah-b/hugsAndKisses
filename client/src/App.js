@@ -10,9 +10,10 @@ import { ItemsContextProvider } from "./context/ItemsContext";import Navigator f
 const App=()=> {
   return (
     <ItemsContextProvider> 
-      <Navigator/>  
+      
       <div>
         <Router>
+          <Navigator/>  
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/item/:id" component={ItemDetailPage}/>

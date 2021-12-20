@@ -132,7 +132,7 @@
 	"name":"Baby girl statement box",
 	"category":"",
 	"price":190,
-	"picture":"https://i.ibb.co/xz86hQP/Cosy-baby-girl-winter-set.jpg",
+	"picture":"https://i.ibb.co/rtNzkHT/Baby-girl-statement-box.jpg",
 	"description":"Includes: Stunning pointelle knitted blanket with scalloped edges. Soft cotton hat with real fur pom pom size 0-6 months. Adorable pacifier chain made with rubber and wooden balls, gorgeous baby fur lined booties size 3-6 months",
 },
 	{
