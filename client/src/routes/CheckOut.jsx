@@ -1,27 +1,21 @@
-import React, { useContext,useEffect,useState } from "react";
+import React, { useContext,useState } from "react";
 import { ItemsContext } from "../context/ItemsContext";
-
-
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
 
 const CheckOut=()=>{
     const {total,setTotal}=useContext(ItemsContext);
     const [firstName,setFirstName]=useState("");
     const [lastName,setLastName]=useState("");
-    
     const [phone,setPhone]=useState("");
     const [email,setEmail]=useState("");
     const [address,setAddress]=useState("");
     const [cardNumber,setCardNumber]=useState("");
    
-    useEffect(()=>{
-        console.log(total);
-    },[])
+    
     return(
         <div className="container">
-            {total}
+            <h4>Total: {total}</h4>
             <Form>
                 <h5>Billing address</h5>
                     <Form.Group className="mb-3">
@@ -33,8 +27,6 @@ const CheckOut=()=>{
                         <Form.Label>Last Name</Form.Label>
                         <Form.Control onBlur={(e)=>{setLastName(e.target.value)}} required type="text" placeholder="Last Name" />
                     </Form.Group>
-
-                   
 
                     <Form.Group className="mb-3">
                         <Form.Label>Phone</Form.Label>
@@ -55,8 +47,6 @@ const CheckOut=()=>{
                         <Form.Label>Card number</Form.Label>
                         <Form.Control onBlur={(e)=>{setCardNumber(e.target.value)}} required type="text" placeholder="Card number" />
                     </Form.Group>
-
-
                     
                     <Button variant="primary" type="submit">
                         Submit

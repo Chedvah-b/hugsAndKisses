@@ -1,52 +1,30 @@
 import React, {useContext, useEffect} from "react";
 import { ItemsContext } from "../context/ItemsContext";
 import { useHistory } from "react-router-dom";
+import { getList } from "../service/service"
 
-const List=(props)=>{
+const List=()=>{
     const {items,setItems}=useContext(ItemsContext);
     const {search,setSearch}=useContext(ItemsContext);
     let history = useHistory();
 
+    const fetchData=async()=>{
+        try {
+            const list=await getList();
+            setItems(list);
+        } catch (error) {
+            console.log(error)
+        }}
 
     useEffect(()=>{
-        const fetchData=async()=>{
-        try {
-            const response=await fetch("http://localhost:5000/list");
-            const jsonData=await response.json();
-            setItems(jsonData.data.items);
-        } catch (error) {
-            
-        }}
-        fetchData()
+        fetchData();
     },[])
 
     const viewItem=(id)=>{
-        
         history.push(`/item/${id}`);
     }
-    /*const filterById=((jsonObject, id)=>{
-        return jsonObject.filter(function(jsonObject) {return (jsonObject['id'] == id);})[0];})*/
     
-
-    /*const [i,setI]=useState([])
-    const ListAll=async()=>{
-        try {
-            const response=await fetch("http://localhost:5000/item");
-            const jsonData=await response.json();
-            console.log(jsonData);
-            //filterById(jsonData,1);
-            setI(jsonData);
-            
-        } catch (error) {
-            console.error(error.message);
-        }
-    }
-
-    useEffect(()=>{
-        ListAll();
-    },[]);*/
     return(
-        
         <div>
             <div className="container" style={{width:"30%"}}>
                 <div className="d-flex">
@@ -76,19 +54,14 @@ const List=(props)=>{
                         {item.description}
                         </p>*/}
                         <div className="d-grid gap-2 col-6 mx-auto">
-
-
                         <button className="btn btn-outline-primary" onClick={()=>viewItem(item.id)}>view</button></div>
                     </div>
                 </div>
-        
                 )
-            
                 }
             </div>
         </div>
-            )
-
+    )
 };
 
 export default List;

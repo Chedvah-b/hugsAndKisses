@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router";
 import { ItemsContext } from "../context/ItemsContext";
-
+import { getItem } from "../service/service";
 
 const ItemDetailPage=()=>{
     const {id}=useParams();
     const {selectedItem,setSelectedItem}=useContext(ItemsContext);
     const {total,setTotal}=useContext(ItemsContext);
+    const {cartItems,setCartItems} = useContext(ItemsContext);
 
     const addToBag=()=>{
         
@@ -16,30 +17,27 @@ const ItemDetailPage=()=>{
             setTotal(prev=>prev+selectedItem.price);
             localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":item+1,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
-        else{setTotal(selectedItem.price);
+        else{setTotal(prev=>prev+selectedItem.price);
             localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":1,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
-  
+        setCartItems([...cartItems,localStorage.getItem(key)]);
+    }
+
+    const fetchData=async()=>{
+        try {
+            const item=await getItem(id);             
+            setSelectedItem(item);
+        } catch (error) {
+            console.log(error);
+        }  
     }
 
     useEffect(()=>{
-        const fetchData=async()=>{
-            try {
-                const response=await fetch(`http://localhost:5000/item/${id}`);
-                
-                const jsonData=await response.json();
-                
-                setSelectedItem(jsonData.data.items[0]);
-            } catch (error) {
-                
-            }
-           
-        }
         fetchData();
     },[])
+    
     return(
         <div className="item ">
-            {console.log("item"+total)}
             <img className="item-image" src={selectedItem.picture} alt=""/>
             <div className="item-information">
                 <h1>

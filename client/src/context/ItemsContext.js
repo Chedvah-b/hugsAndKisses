@@ -7,10 +7,11 @@ export const ItemsContextProvider=(props)=>{
     const [selectedItem,setSelectedItem]=useState([]);
     const [total,setTotal]=useState(0);
     const [search,setSearch]=useState("");
+    const [cartItems,setCartItems]=useState([]);
 
     return(
-        <ItemsContext.Provider value={{items,setItems,selectedItem,setSelectedItem,total,setTotal,search,setSearch}}>
-            {props.children}{console.log("context ",total)}
+        <ItemsContext.Provider value={{items,setItems,selectedItem,setSelectedItem,total,setTotal,search,setSearch,cartItems,setCartItems}}>
+            {props.children}
         </ItemsContext.Provider>
     )
 }

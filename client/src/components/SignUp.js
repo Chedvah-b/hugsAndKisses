@@ -6,19 +6,19 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 
-const SignUp=(props)=>{
+const SignUp=()=>{
     const [show, setShow] = useState(false);
 
-  const handleClose = () => {setShow(false);};
-  const handleShow = () => {setShow(true)};
+    const handleClose = () => {setShow(false);};
+    const handleShow = () => {setShow(true)};
     const day=["Day","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"];
     const month=["Month","01","02","03","04","05","06","07","08","09","10","11","12"];
     const year=["Year","2020","2021"];
     const [firstName,setFirstName]=useState("");
     const [lastName,setLastName]=useState("");
-    const [dateOfBirthD,setDateOfBirthD]=useState(0);
-    const [dateOfBirthM,setDateOfBirthM]=useState(0);
-    const [dateOfBirthY,setDateOfBirthY]=useState(0);
+    const [dateOfBirthDay,setDateOfBirthDay]=useState(0);
+    const [dateOfBirthMonth,setDateOfBirthMonth]=useState(0);
+    const [dateOfBirthYear,setDateOfBirthYear]=useState(0);
     const [phone,setPhone]=useState("");
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
@@ -48,7 +48,7 @@ const SignUp=(props)=>{
                         <Form.Label>Date of Birth</Form.Label>
                         <Row className="g-3">
                         <Col md>
-                        <Form.Select onBlur={(e)=>{setDateOfBirthD(e.target.value)}} aria-label="Default select example">
+                        <Form.Select onBlur={(e)=>{setDateOfBirthDay(e.target.value)}} aria-label="Default select example">
                             {day.map(d=>(
                                 <option key={d} value={d}>{d}</option>
                             ))}
@@ -56,7 +56,7 @@ const SignUp=(props)=>{
                             </Form.Select>
                         </Col>
                         <Col md>
-                        <Form.Select onBlur={(e)=>{setDateOfBirthM(e.target.value)}} aria-label="Default select example">
+                        <Form.Select onBlur={(e)=>{setDateOfBirthMonth(e.target.value)}} aria-label="Default select example">
                             {month.map(m=>(
                                     <option key={m} value={m}>{m}</option>
                                 ))}
@@ -65,7 +65,7 @@ const SignUp=(props)=>{
                         </Col>
                         <Col md>
                             
-                            <Form.Select onBlur={(e)=>{setDateOfBirthY(e.target.value)}} aria-label="Floating label select example">
+                            <Form.Select onBlur={(e)=>{setDateOfBirthYear(e.target.value)}} aria-label="Floating label select example">
                             {year.map(y=>(
                                 <option key={y} value={y}>{y}</option>
                             ))}
@@ -102,37 +102,13 @@ const SignUp=(props)=>{
                         <Form.Control required type="password" />
                     </Form.Group>
                     
-                    <Button onClick={()=>{console.log(firstName)}} variant="primary" type="submit">
+                    <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>
             </Offcanvas.Body>
         </Offcanvas>
     </div>
-        
-/*<div>
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-        </button>
-
-
-        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                    ...
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div></div>*/
     )
 }
 
