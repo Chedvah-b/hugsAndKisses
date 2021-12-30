@@ -34,6 +34,35 @@ module.exports = {
         }
     },
 
+    //Add new customer
+    async signUp(req,res){
+        try {
+            const results=await Query.signUp(req.body.firstName, req.body.lastName, req.body.phone, req.body.email, req.body.password);
+            res.status(200).json({
+                status: "succes",
+              });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async logIn(req,res){
+        try {
+            const results=await Query.logIn(req.params.email, req.params.password);
+            if(results.rows.length>0){
+                res.status(200).json({
+                    status: "succes",
+                });
+            }
+            else{
+                res.status(400).json({
+                    status: "fail",
+                  });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
         
 };
 

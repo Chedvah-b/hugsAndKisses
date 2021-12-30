@@ -4,7 +4,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
+import { addNewCustomer } from "../service/service";
 
 const SignUp=()=>{
     const [show, setShow] = useState(false);
@@ -23,6 +23,9 @@ const SignUp=()=>{
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
     
+    const submit=async()=>{
+        await addNewCustomer(firstName,lastName,phone,email,password);
+    }
 
     return(
     <div>
@@ -102,7 +105,7 @@ const SignUp=()=>{
                         <Form.Control required type="password" />
                     </Form.Group>
                     
-                    <Button variant="primary" type="submit">
+                    <Button onClick={()=>submit()} variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>

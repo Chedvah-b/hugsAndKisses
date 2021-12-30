@@ -12,8 +12,8 @@ const port = process.env.PORT || '5000'; // INITIALIZE DEFAULT PORT OR PORT FROM
 //const logger = require('morgan'); // TERMINAL LOGGER: SHOWS THE ROUTE AND STATUS CODE FOR EVERY REQUEST
 
 // VIEW ENGINE SETUP
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+/*app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');*/
 
 //app.use(logger('dev')); // USE MORGAN
 app.use(bodyParser.urlencoded({ extended: false })); // PARSE application/x-www-form-urlencoded

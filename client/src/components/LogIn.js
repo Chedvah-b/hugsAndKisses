@@ -3,12 +3,19 @@ import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas"
 import Form from "react-bootstrap/Form"
 import SignUp from "./SignUp";
-
+import { checkLogIn } from "../service/service";
 
 const LogIn=()=>{
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [email,setEmail]=useState("");
+    const [password,setPassword]=useState("");
+
+    const checkDetails = async() =>{
+        await checkLogIn(email,password);
+    }
 
     return(
     <div>
@@ -22,16 +29,16 @@ const LogIn=()=>{
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control onBlur={(e)=>{setEmail(e.target.value)}} type="email" placeholder="Enter email" />
                         
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control onBlur={(e)=>{setPassword(e.target.value)}} type="password" placeholder="Password" />
                     </Form.Group>
                     
-                    <Button variant="dark">Sign in</Button>
+                    <Button onClick={()=>checkDetails()} variant="dark">Sign in</Button>
                 </Form>
                 <br/>
                 <h5>New customer</h5>
