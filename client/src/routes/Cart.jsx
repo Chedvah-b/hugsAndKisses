@@ -3,10 +3,12 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { ItemsContext } from "../context/ItemsContext";
 import {Link} from "react-router-dom";
+import LogIn from "../components/LogIn";
 
 const Cart=()=>{
     const {cartItems,setCartItems} = useContext(ItemsContext);
     const {total,setTotal}=useContext(ItemsContext);
+    const {userId,setUserId}=useContext(ItemsContext);
     
 
 useEffect(() => {
@@ -15,7 +17,7 @@ useEffect(() => {
        storeLocalStorage.push(JSON.parse(value));
     }
     setCartItems(storeLocalStorage);
-
+    setTotal(totalAmount());
     },[])
 
 
@@ -35,11 +37,16 @@ const removeItem=(id)=>{
 }
 
 
-/*function totalAmount(){ return LS.reduce(
+function totalAmount(){ return cartItems.reduce(
     (previousAmount, currentAmount)=>previousAmount+(currentAmount.price*currentAmount.amount), 
     0);
-}*/
+}
 
+const checkIfLoggedIn=()=>{
+    if(userId===0){console.log("id===0");
+        return <LogIn />
+    }
+}
 
 return(
        <div className="container">
@@ -69,8 +76,8 @@ return(
                 
             </tbody>
             </Table>
-                        <h1>Total: {total}</h1>
-            <Link to="/check-out"><Button>go to check out</Button></Link>      
+                        <h1>Total: {totalAmount()}</h1>
+            <Link onClick={()=>checkIfLoggedIn()} to="/check-out"><Button>go to check out</Button></Link>      
        </div>
     )
 }

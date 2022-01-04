@@ -29,9 +29,24 @@ async function addNewCustomer(firstName,lastName,phone,email,password){
 }
 
 async function checkLogIn(email,password){
-    const response=await fetch(`${host}/logIn/${email}/${password}`);console.log("jsahjhsjf");
+    const response=await fetch(`${host}/logIn/${email}/${password}`);
     const jsonData=await response.json();
-    console.log("checkout",jsonData);
+    return jsonData;//.status;
 }
 
-export {getList, getItem, addNewCustomer, checkLogIn};
+async function checkout(userId, itemId, amount){
+    const data={
+        userId: userId,
+        itemId: itemId,
+        amount: amount
+    };
+    await fetch(`${host}/checkout`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+}
+
+export {getList, getItem, addNewCustomer, checkLogIn, checkout};

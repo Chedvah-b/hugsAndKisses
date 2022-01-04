@@ -6,7 +6,7 @@ import { getItem } from "../service/service";
 const ItemDetailPage=()=>{
     const {id}=useParams();
     const {selectedItem,setSelectedItem}=useContext(ItemsContext);
-    const {total,setTotal}=useContext(ItemsContext);
+    //const {total,setTotal}=useContext(ItemsContext);
     const {cartItems,setCartItems} = useContext(ItemsContext);
 
     const addToBag=()=>{
@@ -14,10 +14,10 @@ const ItemDetailPage=()=>{
         var key={id}.id;
         if(JSON.parse(localStorage.getItem(key))){
             var item = JSON.parse(localStorage.getItem(key)).amount;
-            setTotal(prev=>prev+selectedItem.price);
+            //setTotal(prev=>prev+selectedItem.price);
             localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":item+1,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
-        else{setTotal(prev=>prev+selectedItem.price);
+        else{//setTotal(prev=>prev+selectedItem.price);
             localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":1,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
         setCartItems([...cartItems,localStorage.getItem(key)]);
@@ -46,12 +46,12 @@ const ItemDetailPage=()=>{
                 <h3>
                     {selectedItem.price} NIS
                 </h3>
+                <p>Description: 
+                {selectedItem.description}
+                </p>
                 <div className="d-grid gap-2 col-6 mx-auto">
                     <button onClick={addToBag} type="button" className="btn btn-outline-success">Add to bag</button>
                 </div>
-                <p>
-                {selectedItem.description}
-                </p>
             </div>
         </div>
     )

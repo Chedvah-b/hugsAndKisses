@@ -52,6 +52,9 @@ module.exports = {
             if(results.rows.length>0){
                 res.status(200).json({
                     status: "succes",
+                    data: {
+                        id: results.rows[0].id,
+                    }
                 });
             }
             else{
@@ -59,6 +62,20 @@ module.exports = {
                     status: "fail",
                   });
             }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async checkout(req,res){
+        try {
+            const results = await Query.checkout(req.body.userId, req.body.itemId, req.body.amount);
+            res.status(200).json({
+                status: "succes",
+                data: {
+                  items: results.rows,
+                },
+              });
         } catch (error) {
             console.log(error);
         }

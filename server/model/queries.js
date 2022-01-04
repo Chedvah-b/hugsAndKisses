@@ -18,4 +18,10 @@ Query.logIn = (email,password) => {
     return db.query(`SELECT * FROM users WHERE email=$1 AND password=$2`,[email,password]);
 }
 
+Query.checkout = (userId, itemId, amount) => {
+    return db.query(`INSERT INTO orders(userId, itemId, amount)
+    VALUES($1, $2, $3)`,[userId, itemId, amount]);
+}
+
+
 module.exports = Query;

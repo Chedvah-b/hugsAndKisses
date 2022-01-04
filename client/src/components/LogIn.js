@@ -1,9 +1,10 @@
-import React,{ useState} from "react";
+import React,{ useContext, useState} from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas"
 import Form from "react-bootstrap/Form"
 import SignUp from "./SignUp";
 import { checkLogIn } from "../service/service";
+import { ItemsContext } from "../context/ItemsContext";
 
 const LogIn=()=>{
     const [show, setShow] = useState(false);
@@ -12,9 +13,17 @@ const LogIn=()=>{
 
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
+    const {userId,setUserId}=useContext(ItemsContext)
 
     const checkDetails = async() =>{
-        await checkLogIn(email,password);
+        const result=await checkLogIn(email,password);
+        if(result.status==="succes"){
+            setUserId(result.data.id);
+            handleClose();
+        }
+        else{
+            window.alert("Invalid login or password. Remember that password is case-sensitive. Please try again.")
+        }
     }
 
     return(

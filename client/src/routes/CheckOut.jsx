@@ -2,9 +2,10 @@ import React, { useContext,useState } from "react";
 import { ItemsContext } from "../context/ItemsContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { checkout } from "../service/service";
 
 const CheckOut=()=>{
-    const {total,setTotal}=useContext(ItemsContext);
+    //const {total,setTotal}=useContext(ItemsContext);
     const [firstName,setFirstName]=useState("");
     const [lastName,setLastName]=useState("");
     const [phone,setPhone]=useState("");
@@ -12,10 +13,15 @@ const CheckOut=()=>{
     const [address,setAddress]=useState("");
     const [cardNumber,setCardNumber]=useState("");
    
+    const submit = async() =>{
+        for (const [key, value] of Object.entries(localStorage)) {
+            await checkout(2, JSON.parse(value).id, JSON.parse(value).amount);
+        }
+    }
     
     return(
         <div className="container">
-            <h4>Total: {total}</h4>
+            {/*<h4>Total: {total}</h4>*/}
             <Form>
                 <h5>Billing address</h5>
                     <Form.Group className="mb-3">
@@ -48,7 +54,7 @@ const CheckOut=()=>{
                         <Form.Control onBlur={(e)=>{setCardNumber(e.target.value)}} required type="text" placeholder="Card number" />
                     </Form.Group>
                     
-                    <Button variant="primary" type="submit">
+                    <Button onClick={()=>submit()} variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>

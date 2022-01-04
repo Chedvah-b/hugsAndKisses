@@ -4,7 +4,8 @@ module.exports = (app) => {
     app.get('/list', service.getAllItems);
     app.get('/item/:id', service.getOneItem);
     app.post('/newCustomer', service.signUp);
-    app.get('/logIn/:email/:password',service.logIn);
+    app.get('/logIn/:email/:password', service.logIn);
+    app.post('/checkout', service.checkout);
 }
 /*
 
