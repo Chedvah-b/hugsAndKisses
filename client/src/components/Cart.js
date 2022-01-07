@@ -82,7 +82,7 @@ return(
 <Link to="/check-out"><Button>go to check out</Button></Link> 
     :
 <Link to="/login"><Button>go to check out</Button></Link>}
-            <Link onClick={()=>checkIfLoggedIn()} to="/check-out"><Button>go to check out mlmk</Button></Link>      
+                 
        </div>
     )
 }
