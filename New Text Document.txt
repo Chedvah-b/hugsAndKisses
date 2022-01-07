@@ -100,7 +100,7 @@
 	"name":"Stylish baby girl gift box",
 	"category":"",
 	"price":190,
-	"picture":"https://i.ibb.co/SwsPzmV/Stylish-baby-girl-gift.jpg",
+	"picture":"https://i.ibb.co/d4qxk7Y/Stylish-baby-girl-gift.jpg",
 	"description":"Includes: Beautiful knit pointelle blanket with scalloped edge. 100% cotton. Soft cotton hat with real fur pom pom size 0-6 months. Adorable pacifier chain made with rubber and wooden balls",
 },
 	{
@@ -108,7 +108,7 @@
 	"name":"Stylish baby boy gift box",
 	"category":"",
 	"price":190,
-	"picture":"https://i.ibb.co/3kgR47S/Stylish-baby-boy-gift.jpg",
+	"picture":"https://i.ibb.co/2jVLTvW/Stylish-baby-boy-gift.jpg",
 	"description":"Includes: Beautiful knit pointelle blanket with scalloped edge. 100% cotton. Soft cotton hat with real fur pom pom size 0-6 months. Adorable pacifier chain made with rubber and wooden balls",
 	},
 	{

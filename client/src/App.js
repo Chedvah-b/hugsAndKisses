@@ -1,10 +1,11 @@
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import './App.css';
-import ItemDetailPage from "./routes/ItemDetailPage";
-import Home from "./routes/Home";
-import Cart from "./routes/Cart";
-import CheckOut from "./routes/CheckOut";
+import ItemDetailPage from "./components/ItemDetailPage";
+import Home from "./components/Home";
+import Cart from "./components/Cart";
+import CheckOut from "./components/CheckOut";import LogIn from "./components/LogIn";
 import { ItemsContextProvider } from "./context/ItemsContext";import Navigator from "./components/Navigator";
+import SignUp from "./components/SignUp";
 
 
 const App=()=> {
@@ -19,6 +20,8 @@ const App=()=> {
             <Route exact path="/item/:id" component={ItemDetailPage}/>
             <Route exact path="/cart" component={Cart}/>
             <Route exact path="/check-out" component={CheckOut}/>
+            <Route exact path="/login" component={LogIn}/>
+            <Route exact path="/signup" component={SignUp}/>
           </Switch>
         </Router>
       

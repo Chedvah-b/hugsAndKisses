@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form"
 import SignUp from "./SignUp";
 import { checkLogIn } from "../service/service";
 import { ItemsContext } from "../context/ItemsContext";
+import CloseButton from 'react-bootstrap/CloseButton';
+import {Link} from "react-router-dom";
 
 const LogIn=()=>{
     const [show, setShow] = useState(false);
@@ -27,8 +29,25 @@ const LogIn=()=>{
     }
 
     return(
-    <div>
-        <Button variant="light" onClick={handleShow}>Sign in</Button>
+    <div className="container">
+        <Link to="/"><CloseButton /></Link>
+        <h1>Log In</h1>
+        <h5>New to this site? <Link to="/signup">Sign Up</Link></h5>
+        <Form>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control onBlur={(e)=>{setEmail(e.target.value)}} type="email" placeholder="Enter email" />
+                        
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control onBlur={(e)=>{setPassword(e.target.value)}} type="password" placeholder="Password" />
+                    </Form.Group>
+                    
+                    <Button onClick={()=>checkDetails()} variant="dark">Log in</Button>
+                </Form>
+        {/*<Button variant="light" onClick={handleShow}>Sign in</Button>
 
         <Offcanvas show={show} onHide={handleClose} placement="end" name="end">
             <Offcanvas.Header closeButton>
@@ -54,7 +73,7 @@ const LogIn=()=>{
                 
                 <SignUp handleClose={handleClose}/>
             </Offcanvas.Body>
-        </Offcanvas>
+    </Offcanvas>*/}
     </div>
     )
 }

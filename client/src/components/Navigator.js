@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import SignUp from "./SignUp";
 import LogIn from "./LogIn";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Navigator=()=>{
 
@@ -15,8 +15,9 @@ const Navigator=()=>{
                     </Link>
                     <Link className="navbar-brand" to="/">Home</Link>
                 </div>
-                <SignUp />
-                <LogIn />
+                <Link to="/login"><button ><AccountCircleIcon />Log In</button></Link>
+                {/*<SignUp />
+                <LogIn />*/}
                 <div key="3" className="d-flex justify-content-evenly align-items-center">
                     <Link className="navbar-brand ms-2" to="/cart">
                         <img width="30px" src="https://i.ibb.co/gj6GX58/shopping-bag.png" alt="shopping-bag" border="0" />
