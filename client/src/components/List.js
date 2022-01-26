@@ -1,7 +1,8 @@
 import React, {useContext, useEffect} from "react";
 import { ItemsContext } from "../context/ItemsContext";
 import { useHistory } from "react-router-dom";
-import { getList } from "../service/service"
+import { getList } from "../service/service";
+import Button from '@mui/material/Button';
 
 const List=()=>{
     const {items,setItems}=useContext(ItemsContext);
@@ -25,7 +26,7 @@ const List=()=>{
     }
     
     return(
-        <div>
+        <div style={{marginTop: '138px'}}>
             <div className="container" style={{width:"30%"}}>
                 <div className="d-flex">
                     <input onChange={(e)=>{setSearch(e.target.value)}} className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
@@ -53,8 +54,10 @@ const List=()=>{
                         {/*<p className="card-text">
                         {item.description}
                         </p>*/}
+                        
+
                         <div className="d-grid gap-2 col-6 mx-auto">
-                        <button className="btn btn-outline-primary" onClick={()=>viewItem(item.id)}>view</button></div>
+                        <button className="btn btn-dark" onClick={()=>viewItem(item.id)}>view</button></div>
                     </div>
                 </div>
                 )

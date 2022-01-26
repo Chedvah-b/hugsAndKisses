@@ -6,6 +6,7 @@ import Cart from "./components/Cart";
 import CheckOut from "./components/CheckOut";import LogIn from "./components/LogIn";
 import { ItemsContextProvider } from "./context/ItemsContext";import Navigator from "./components/Navigator";
 import SignUp from "./components/SignUp";
+import Orders from "./components/Orders";
 
 
 const App=()=> {
@@ -22,6 +23,7 @@ const App=()=> {
             <Route exact path="/check-out" component={CheckOut}/>
             <Route exact path="/login" component={LogIn}/>
             <Route exact path="/signup" component={SignUp}/>
+            <Route exact path="/my-orders" component={Orders}/>
           </Switch>
         </Router>
       

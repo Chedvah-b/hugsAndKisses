@@ -34,13 +34,30 @@ async function checkLogIn(email,password){
     return jsonData;//.status;
 }
 
-async function checkout(userId, itemId, amount){
+async function checkout(userId, status, totalPrice){
     const data={
         userId: userId,
+        status: status,
+        totalPrice: totalPrice
+    };
+    const response=await fetch(`${host}/checkout`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    const jsonData=await response.json();
+    return jsonData.data.id||[];
+}
+
+async function orderItem(orderId, itemId, amount){
+    const data={
+        orderId: orderId,
         itemId: itemId,
         amount: amount
     };
-    await fetch(`${host}/checkout`,{
+    const response=await fetch(`${host}/orderItem`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -49,4 +66,16 @@ async function checkout(userId, itemId, amount){
     });
 }
 
-export {getList, getItem, addNewCustomer, checkLogIn, checkout};
+async function orders(userId){
+    const response=await fetch(`${host}/orders/${userId}`);
+    const jsonData=await response.json();console.log("res ",jsonData.data);
+    return jsonData.data.items||[];
+}
+
+async function ordersList(orderId){
+    const response=await fetch(`${host}/ordersList/${orderId}`);
+    const jsonData=await response.json();console.log("res ",jsonData.data);
+    return jsonData.data.items||[];
+}
+
+export {getList, getItem, addNewCustomer, checkLogIn, checkout, orderItem, orders, ordersList};

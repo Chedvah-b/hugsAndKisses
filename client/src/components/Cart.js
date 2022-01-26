@@ -41,7 +41,7 @@ function totalAmount(){ return cartItems.reduce(
     (previousAmount, currentAmount)=>previousAmount+(currentAmount.price*currentAmount.amount), 
     0);
 }
-var bbb;
+
 const checkIfLoggedIn=()=>{
     if(userId===0){console.log("id===0");
         return false;

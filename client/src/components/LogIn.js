@@ -15,12 +15,14 @@ const LogIn=()=>{
 
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
-    const {userId,setUserId}=useContext(ItemsContext)
+    const {userId,setUserId}=useContext(ItemsContext);
+    const {userName,setUSerName}=useContext(ItemsContext);
 
     const checkDetails = async() =>{
         const result=await checkLogIn(email,password);
         if(result.status==="succes"){
             setUserId(result.data.id);
+            setUSerName(result.data.firstName);
             handleClose();
         }
         else{
@@ -29,8 +31,8 @@ const LogIn=()=>{
     }
 
     return(
-    <div className="container">
-        <Link to="/"><CloseButton /></Link>
+    <div style={{position: 'absolute', top: '0', backgroundColor: 'white', padding:'20px 30%', width: '100%'}} className="">
+        <Link style={{position: 'relative', right:'0px', paddingLeft: '100%'}} to="/"><CloseButton /></Link>
         <h1>Log In</h1>
         <h5>New to this site? <Link to="/signup">Sign Up</Link></h5>
         <Form>

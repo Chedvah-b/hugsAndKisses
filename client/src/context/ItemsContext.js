@@ -9,9 +9,10 @@ export const ItemsContextProvider=(props)=>{
     const [search,setSearch]=useState("");
     const [cartItems,setCartItems]=useState([]);
     const [userId,setUserId]=useState(0);
+    const [userName,setUSerName]=useState("Log In");
 
     return(
-        <ItemsContext.Provider value={{items,setItems,selectedItem,setSelectedItem,total,setTotal,search,setSearch,cartItems,setCartItems,userId,setUserId}}>
+        <ItemsContext.Provider value={{items,setItems,selectedItem,setSelectedItem,total,setTotal,search,setSearch,cartItems,setCartItems,userId,setUserId,userName,setUSerName}}>
             {props.children}
         </ItemsContext.Provider>
     )

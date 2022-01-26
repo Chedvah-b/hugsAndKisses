@@ -2,6 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router";
 import { ItemsContext } from "../context/ItemsContext";
 import { getItem } from "../service/service";
+import Paper from "@mui/material/Paper";
+import { Typography } from '@mui/material';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 const ItemDetailPage=()=>{
     const {id}=useParams();
@@ -36,8 +40,11 @@ const ItemDetailPage=()=>{
         fetchData();
     },[])
     
+    
+
     return(
-        <div className="item ">
+        <div style={{marginTop: '138px'}}>
+            <div className="item ">
             <img className="item-image" src={selectedItem.picture} alt=""/>
             <div className="item-information">
                 <h1>
@@ -53,6 +60,31 @@ const ItemDetailPage=()=>{
                     <button onClick={addToBag} type="button" className="btn btn-outline-success">Add to bag</button>
                 </div>
             </div>
+        </div>
+<Box sx={{ml:25,p:1}}>
+        <div className="d-flex flex-row justify-content-center">
+            <div style={{width:"400px", height:"500px"}}>
+                <img style={{width:"300px", height:"300px"}} src={selectedItem.picture} alt=""/>
+            </div>
+            
+            <Box sx={{width:"45rem"}}>
+            <Typography sx={{m:0, fontWeight: "bold"}} variant="h4">
+                {selectedItem.name}
+            </Typography>
+                <div style={{ paddingTop:"25px" }}><span >
+                    {selectedItem.price} NIS
+                </span>
+                </div>
+                <div style={{ paddingTop:"25px" }}>
+                    <Button onClick={addToBag} sx={{background:"white", color:"black", borderRadius: 0, height: 40, width:335, borderStyle: "solid", borderColor: "black", borderWidth: 1, fontFamily:""}} >Add to Cart</Button>
+                </div>
+                <p style={{ paddingTop:"25px" }}> 
+                {selectedItem.description}
+                </p>
+                
+            </Box>
+        </div>
+        </Box>
         </div>
     )
 }

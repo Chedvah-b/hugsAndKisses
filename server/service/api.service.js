@@ -54,6 +54,7 @@ module.exports = {
                     status: "succes",
                     data: {
                         id: results.rows[0].id,
+                        firstName: results.rows[0].firstname,
                     }
                 });
             }
@@ -69,13 +70,52 @@ module.exports = {
 
     async checkout(req,res){
         try {
-            const results = await Query.checkout(req.body.userId, req.body.itemId, req.body.amount);
+            const results = await Query.checkout(req.body.userId, req.body.status, req.body.totalPrice);
             res.status(200).json({
                 status: "succes",
                 data: {
-                  items: results.rows,
+                    id: results.rows[0].id,
                 },
               });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async orderItem(req,res){
+        try {console.log("order ",req.body.orderId, req.body.itemId, req.body.amount)
+            const t=await Query.orderItem(req.body.orderId, req.body.itemId, req.body.amount);console.log("t ",t)
+            res.status(200).json({
+                status: "succes",
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async getOrders(req,res){
+        try {
+            const results=await Query.getOrders(req.params.id);//console.log("res ",results);
+            res.status(200).json({
+                status: "succes",
+                data: {
+                    items: results.rows,
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async getOrdersList(req,res){
+        try {
+            const results=await Query.getOrdersList(req.params.id);
+            res.status(200).json({
+                status: "succes",
+                data: {
+                    items: results.rows,
+                },
+            });
         } catch (error) {
             console.log(error);
         }

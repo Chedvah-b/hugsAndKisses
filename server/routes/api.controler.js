@@ -6,6 +6,9 @@ module.exports = (app) => {
     app.post('/newCustomer', service.signUp);
     app.get('/logIn/:email/:password', service.logIn);
     app.post('/checkout', service.checkout);
+    app.post('/orderItem', service.orderItem);
+    app.get('/orders/:id', service.getOrders);
+    app.get('/ordersList/:id', service.getOrdersList);
 }
 /*
 

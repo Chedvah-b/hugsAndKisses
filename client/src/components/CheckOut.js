@@ -3,6 +3,7 @@ import { ItemsContext } from "../context/ItemsContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { checkout } from "../service/service";
+import { orderItem } from "../service/service";
 
 const CheckOut=()=>{
     //const {total,setTotal}=useContext(ItemsContext);
@@ -12,10 +13,12 @@ const CheckOut=()=>{
     const [email,setEmail]=useState("");
     const [address,setAddress]=useState("");
     const [cardNumber,setCardNumber]=useState("");
+    const {total,setTotal}=useContext(ItemsContext);
    
     const submit = async() =>{
+        const orderId=await checkout(2/*, */, 'new', Number(total));console.log("i ",orderId);
         for (const [key, value] of Object.entries(localStorage)) {
-            await checkout(2, JSON.parse(value).id, JSON.parse(value).amount);
+            await orderItem(orderId, JSON.parse(value).id, JSON.parse(value).amount);
         }
         localStorage.clear();
     }
