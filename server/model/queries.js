@@ -1,8 +1,9 @@
 const db = require('../db');
 const Query = {};
+const itemsPerPage = process.env.ITEMSPERPAGE;
 
-Query.getAllItems = () => {
-    return db.query(`SELECT * FROM item ORDER BY name`);
+Query.getAllItems = (page) => {
+    return db.query(`SELECT * FROM item ORDER BY name limit $2 offset ($1-1)*$2`,[page, itemsPerPage]);
 }
 
 Query.getOneItem = (id) => {

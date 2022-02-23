@@ -7,15 +7,17 @@ import CheckOut from "./components/CheckOut";import LogIn from "./components/Log
 import { ItemsContextProvider } from "./context/ItemsContext";import Navigator from "./components/Navigator";
 import SignUp from "./components/SignUp";
 import Orders from "./components/Orders";
+import Footer from "./components/Footer";
 
 
 const App=()=> {
+  
   return (
     <ItemsContextProvider> 
       
-      <div>
+      <div style={{marginTop: '138px', position: 'relative', minHeight: '100vh', paddingBottom: '2.5rem'}}>
         <Router>
-          <Navigator/>  
+        {window.location.pathname !== '/login' && <Navigator /> }
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/item/:id" component={ItemDetailPage}/>
@@ -25,8 +27,8 @@ const App=()=> {
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/my-orders" component={Orders}/>
           </Switch>
+          {window.location.pathname !== '/login' && <Footer /> }
         </Router>
-      
       </div>
     </ItemsContextProvider>
   );

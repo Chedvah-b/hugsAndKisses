@@ -1,9 +1,8 @@
 import React,{useEffect, useContext} from "react";
-import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
+import { Button, Dialog, DialogTitle, List, ListItem, ListItemText, ListItemAvatar, Avatar, Container, TableContainer, Table, TableRow, TableCell, TableHead, TableBody, Paper, Grid, Typography } from "@mui/material";
 import { ItemsContext } from "../context/ItemsContext";
 import {Link} from "react-router-dom";
-import LogIn from "./LogIn";
+
 
 const Cart=()=>{
     const {cartItems,setCartItems} = useContext(ItemsContext);
@@ -50,40 +49,43 @@ const checkIfLoggedIn=()=>{
 }
 
 return(
-       <div className="container">
-           <Table  bordered >
-            <thead>
-                <tr>
-                <th>PRODUCT</th>
-                <th>PRICE</th>
-                <th>QUANTITY</th>
-                <th>REMOVE</th>
-                </tr>
-            </thead>
-            <tbody>
+       <Container sx={{mt: '128px'}}>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>Product</TableCell>
+                        <TableCell align="right">Price</TableCell>
+                        <TableCell align="right">Quantity</TableCell>
+                        <TableCell align="right">Remove</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {cartItems.map((item) => (
+                        <TableRow
+                        key={item.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                        <TableCell component="th" scope="row">
+                            <Avatar src={item.picture} sx={{ width: 100, height: 100 }} variant="square"/>{item.name}{item.description}
+                        </TableCell>
+                        <TableCell align="right">{item.price}</TableCell>
+                        <TableCell align="right">{item.amount}</TableCell>
+                        <TableCell align="right"><Button onClick={()=>removeItem(item.id)}>remove</Button></TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+                </TableContainer>
 
-            {cartItems.map((item) =>  {
-                return(
-                <tr key={item.id}>
-                <td>
-                    <img width="100px" src={item.picture} alt=""/>
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                </td>
-                <td>{item.price}</td>
-                <td>{item.amount}</td>
-                <td><Button onClick={()=>removeItem(item.id)}>remove</Button></td>
-                </tr>)})}
-                
-            </tbody>
-            </Table>
-                        <h1>Total: {totalAmount()}</h1>
-                        {checkIfLoggedIn() ?
-<Link to="/check-out"><Button>go to check out</Button></Link> 
-    :
-<Link to="/login"><Button>go to check out</Button></Link>}
+                <Typography variant="h4">Total: {totalAmount()}</Typography>
+            
+                {checkIfLoggedIn() ?
+                    <Link to="/check-out" style={{textDecoration: 'none'}}><Button>go to check out</Button></Link> 
+                    :
+                    <Link to="/login" style={{textDecoration: 'none'}}><Button>go to check out</Button></Link>}
                  
-       </div>
+       </Container>
     )
 }
 

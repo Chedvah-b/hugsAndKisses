@@ -1,12 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {Link} from "react-router-dom";
-import SignUp from "./SignUp";
-import LogIn from "./LogIn";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { ItemsContext } from "../context/ItemsContext";
-import { AppBar, Container, CssBaseline, Toolbar, Typography, Badge } from "@mui/material";
+import { AppBar, Toolbar, Typography, Badge } from "@mui/material";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { purple, red } from '@mui/material/colors';
+
 
 import white from '@mui/material/colors/blue';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -14,18 +13,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 
-import IconButton from '@mui/material/IconButton';
-
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-const pages=['home','orders'];
-    const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const Navigator=()=>{
+
+  
+const mycolor = red[500];
 
   const theme = createTheme({
     palette: {
@@ -35,106 +26,46 @@ const Navigator=()=>{
 
     const {userName,setUSerName}=useContext(ItemsContext);
 
-    const menu=['Home','My Orders'];
+    const menu=['Home1','My Orders1'];
     
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = useState(null);
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-      };
-      const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-      };
-    
-      const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-      };
-    
-      const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-      };
+
+      const numberOfItems = () =>{
+        let sumOfItems=0;
+        for (const [key, value] of Object.entries(localStorage)) {
+            sumOfItems+= JSON.parse(value).amount;
+          }
+        return sumOfItems;
+      }
 
     return (
-       <div style={{zIndex: '1'}}>
-             {/*<nav key="1" className="navbar sticky-top bg-white navbar-light">
-            <div key="2" className="container-fluid">
-                <div>
-                    <Link className="navbar-brand" to="/">
-                        <img src="https://i.ibb.co/jWRB1gJ/logo.png" alt="logo" border="0"/>
-                    </Link>
-                    <Link className="navbar-brand" to="/">Home</Link>
-                </div>
-                <Link to="/login"><button ><AccountCircleIcon />Log In</button></Link>
-                {/*<SignUp />
-                <LogIn />}
-                <div key="3" className="d-flex justify-content-evenly align-items-center">
-                    <Link className="navbar-brand ms-2" to="/cart">
-                        <img width="30px" src="https://i.ibb.co/gj6GX58/shopping-bag.png" alt="shopping-bag" border="0" />
-                    </Link>
-                </div>                
-                
-            </div>
-        </nav>
-        <br />*/}
-
-        {/*<nav >
-            <div className="d-flex flex-row justify-content-between">
-                <div>
-                    <Link  to="/">
-                        <img src="https://i.ibb.co/jWRB1gJ/logo.png" alt="logo" border="0"/>
-                    </Link>
-                </div>
-                <div className="mx-90 my-40">
-                    <Link style={{fontFamily:"Anton",
-                                    margin: "100px 50px"}} to="/">Home</Link>
-                    <Link to="/my-orders">my orders</Link>
-                </div>
-                
-                <div >
-                <Link className="p-6" to="/login"><button ><AccountCircleIcon />{userName}</button></Link>
-                
-                    <Link  to="/cart">
-                        <img width="30px" src="https://i.ibb.co/gj6GX58/shopping-bag.png" alt="shopping-bag" border="0" />
-                    </Link>
-                </div>                
-                
-            </div>
-        </nav>*/}
+       <div>
+             
 
         
 
 <ThemeProvider theme={theme}>
-        <AppBar position="fixed" color="navbar" style={{height: '128px'}}>
+        <AppBar position="fixed" color="navbar" style={{height: '128px', boxShadow: 'none'}}>
             <Toolbar sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
             <img src="https://i.ibb.co/vjDs5M9/stickers-09.png" alt="stickers-09" style={{height:'128px'}} border="0"/>
             <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Link to='/'>
+                <Link to='/' style={{textDecoration: 'none'}}>
                     <Typography sx={{p: '0 15px'}} color='black' varient='h5'>Home</Typography>
                 </Link>
-                <Link to='/my-orders'>
+                <Link to='/my-orders' style={{textDecoration: 'none'}}>
                     <Typography color='black' varient='h5'>My Orders</Typography>
                 </Link>
             </Box>
             <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Link to='/login'style={{width: '83px'}}>
+                <Link to='/login'style={{width: '83px', textDecoration: 'none'}}>
                     <Typography sx={{p: '0 7px'}} color='black' varient='h5' ><AccountCircleIcon />{userName}</Typography>
                 </Link>
                 <Link to='/cart'>
-                    <Badge badgeContent={localStorage.length} color="error">
+                    <Badge badgeContent={numberOfItems()} color="error">
                         <Typography color='black' varient='h5'><ShoppingBagIcon /></Typography>
                     </Badge>
                 </Link>
             </Box>
             
-            {menu.map((item)=>{
-                <Menu open='true'>
-                <MenuItem>
-                    <Link to='/login'>
-                        <Typography color='black' varient='h5'><AccountCircleIcon />{item}</Typography>
-                    </Link>
-                </MenuItem>
-            </Menu>
-            })}
             
             
             </Toolbar>

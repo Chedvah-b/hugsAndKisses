@@ -31,7 +31,7 @@ app.all('/*', (req, res, next) => {
 });
 
 // SECURITY
-app.disable('x-powered-by');
+//app.disable('x-powered-by');
 
 // ROUTES
 articles(app); // ARTICLES ROUTES

@@ -2,16 +2,17 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router";
 import { ItemsContext } from "../context/ItemsContext";
 import { getItem } from "../service/service";
-import Paper from "@mui/material/Paper";
-import { Typography } from '@mui/material';
+import { Grid, Typography, Container, FormControl, InputLabel, Select, MenuItem, Menu, Input } from '@mui/material';
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { useState } from "react";
 
 const ItemDetailPage=()=>{
     const {id}=useParams();
     const {selectedItem,setSelectedItem}=useContext(ItemsContext);
     //const {total,setTotal}=useContext(ItemsContext);
     const {cartItems,setCartItems} = useContext(ItemsContext);
+    const [amount,setAmount] = useState(1);
 
     const addToBag=()=>{
         
@@ -19,10 +20,10 @@ const ItemDetailPage=()=>{
         if(JSON.parse(localStorage.getItem(key))){
             var item = JSON.parse(localStorage.getItem(key)).amount;
             //setTotal(prev=>prev+selectedItem.price);
-            localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":item+1,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
+            localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":item+amount,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
         else{//setTotal(prev=>prev+selectedItem.price);
-            localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":1,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
+            localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":amount,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
         setCartItems([...cartItems,localStorage.getItem(key)]);
     }
@@ -44,47 +45,60 @@ const ItemDetailPage=()=>{
 
     return(
         <div style={{marginTop: '138px'}}>
-            <div className="item ">
-            <img className="item-image" src={selectedItem.picture} alt=""/>
-            <div className="item-information">
-                <h1>
-                    {selectedItem.name}
-                </h1>
-                <h3>
-                    {selectedItem.price} NIS
-                </h3>
-                <p>Description: 
-                {selectedItem.description}
-                </p>
-                <div className="d-grid gap-2 col-6 mx-auto">
-                    <button onClick={addToBag} type="button" className="btn btn-outline-success">Add to bag</button>
-                </div>
-            </div>
-        </div>
-<Box sx={{ml:25,p:1}}>
-        <div className="d-flex flex-row justify-content-center">
-            <div style={{width:"400px", height:"500px"}}>
-                <img style={{width:"300px", height:"300px"}} src={selectedItem.picture} alt=""/>
-            </div>
-            
-            <Box sx={{width:"45rem"}}>
-            <Typography sx={{m:0, fontWeight: "bold"}} variant="h4">
-                {selectedItem.name}
-            </Typography>
-                <div style={{ paddingTop:"25px" }}><span >
-                    {selectedItem.price} NIS
-                </span>
-                </div>
-                <div style={{ paddingTop:"25px" }}>
-                    <Button onClick={addToBag} sx={{background:"white", color:"black", borderRadius: 0, height: 40, width:335, borderStyle: "solid", borderColor: "black", borderWidth: 1, fontFamily:""}} >Add to Cart</Button>
-                </div>
-                <p style={{ paddingTop:"25px" }}> 
-                {selectedItem.description}
-                </p>
-                
-            </Box>
-        </div>
-        </Box>
+     
+        <Container sx={{mb: '44px'}}>
+            <Grid container sx={{display: 'flex',justifyContent: 'center',flexDirection: 'row'}}>
+                <Grid item xs={6} sx={{display: 'flex',flexDirection:'row', justifyContent: 'flex-end',pr:'10px'}}>
+                    <img src={selectedItem.picture} style={{width: '400px'}}/>
+                </Grid>
+                <Grid container xs={6} sx={{flexDirection: 'column', pl:'10px', justifyContent: 'flex-start'}}>
+                    <Grid item>
+                        <Typography sx={{pb: '5px'}} variant="h5">{selectedItem.name}</Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography sx={{pb: '5px'}} variant="h6">{selectedItem.price}</Typography>
+                    </Grid>    
+                        <Grid container spacing={2}>
+                            <Grid item xs={2}>
+                                <Input type='number' defaultValue={1} onChange={(e)=>{setAmount(Number(e.target.value))}}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Button variant="outlined" onClick={()=>addToBag()}>Add To Cart</Button>
+                            </Grid>
+
+                        </Grid>
+                        
+                        {/*<FormControl sx={{width: '50%'}}>
+                            <InputLabel>Select Amount</InputLabel>
+                            <Select
+                                label="Select Amount"
+                                onChange={()=>{}}
+                            >
+                                
+                                <MenuItem value={1}>1</MenuItem>
+                                <MenuItem value={2}>2</MenuItem>
+                                <MenuItem value={3}>3</MenuItem>
+                                <MenuItem value={4}>4</MenuItem>
+                                <MenuItem value={5}>5</MenuItem>
+                                <MenuItem value={6}>6</MenuItem>
+                                <MenuItem value={7}>7</MenuItem>
+                                <MenuItem value={8}>8</MenuItem>
+                                <MenuItem value={9}>9</MenuItem>
+                                <MenuItem value={10}>10</MenuItem>
+                            </Select>
+    </FormControl>*/}
+                        
+                        <Typography sx={{pt: '5px', width: '400px'}}>Product info
+                            <br />
+                            {selectedItem.description}
+                        </Typography>
+                    
+                </Grid>
+
+            </Grid>
+        </Container>
+
+        
         </div>
     )
 }

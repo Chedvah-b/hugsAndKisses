@@ -1,54 +1,50 @@
 import React,{ useContext, useState} from "react";
-import Button from "react-bootstrap/Button";
-import Offcanvas from "react-bootstrap/Offcanvas"
-import Form from "react-bootstrap/Form"
-import SignUp from "./SignUp";
 import { checkLogIn } from "../service/service";
 import { ItemsContext } from "../context/ItemsContext";
-import CloseButton from 'react-bootstrap/CloseButton';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import { Box, Button, Container, IconButton, TextField, Typography } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 const LogIn=()=>{
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
     const {userId,setUserId}=useContext(ItemsContext);
     const {userName,setUSerName}=useContext(ItemsContext);
 
+    const history = useHistory();
+
     const checkDetails = async() =>{
-        const result=await checkLogIn(email,password);
-        if(result.status==="succes"){
-            setUserId(result.data.id);
-            setUSerName(result.data.firstName);
-            handleClose();
+        if(email!==""&&password!==""){
+            const result=await checkLogIn(email,password);
+            if(result.status==="succes"){
+                setUserId(result.data.id);
+                setUSerName(result.data.firstName);
+                history.goBack();
+            }
+            else{
+                window.alert("Invalid login or password. Remember that password is case-sensitive. Please try again.")
+            }
         }
         else{
-            window.alert("Invalid login or password. Remember that password is case-sensitive. Please try again.")
+            window.alert("Please insert email and password")
         }
+        
     }
 
     return(
-    <div style={{position: 'absolute', top: '0', backgroundColor: 'white', padding:'20px 30%', width: '100%'}} className="">
-        <Link style={{position: 'relative', right:'0px', paddingLeft: '100%'}} to="/"><CloseButton /></Link>
-        <h1>Log In</h1>
-        <h5>New to this site? <Link to="/signup">Sign Up</Link></h5>
-        <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control onBlur={(e)=>{setEmail(e.target.value)}} type="email" placeholder="Enter email" />
-                        
-                    </Form.Group>
+    //<div style={{position: 'absolute', top: '0', backgroundColor: 'white', padding:'20px 30%', width: '100%'}} className="">
+    <Container sx={{width: '50%'}}>
+        <IconButton sx={{position: 'relative', right:'0px', ml: '100%'}} onClick={()=>{history.goBack()}}><CloseIcon /></IconButton>
+            
+        <Typography variant="h3">Log In</Typography>
+        <Typography variant="h5">New to this site? <Link to="/signup">Sign Up</Link></Typography>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control onBlur={(e)=>{setPassword(e.target.value)}} type="password" placeholder="Password" />
-                    </Form.Group>
-                    
-                    <Button onClick={()=>checkDetails()} variant="dark">Log in</Button>
-                </Form>
+        <Box component= "form" sx={{m: '10px'}}>
+            <TextField variant="standard" label="Email Address" fullWidth onChange={(e)=>{setEmail(e.target.value)}}/>
+            <TextField variant="standard" label="Password" type="password" fullWidth onChange={(e)=>{setPassword(e.target.value)}}/>
+            <Button onClick={()=>checkDetails()}>Log in</Button>
+        </Box>
         {/*<Button variant="light" onClick={handleShow}>Sign in</Button>
 
         <Offcanvas show={show} onHide={handleClose} placement="end" name="end">
@@ -76,7 +72,8 @@ const LogIn=()=>{
                 <SignUp handleClose={handleClose}/>
             </Offcanvas.Body>
     </Offcanvas>*/}
-    </div>
+    {/*</div>*/}
+    </Container>
     )
 }
 

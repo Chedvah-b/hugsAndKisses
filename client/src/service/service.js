@@ -1,7 +1,7 @@
 const host="http://localhost:5000";
 
-async function getList(){
-    const response=await fetch(`${host}/list`);
+async function getList(page){
+    const response=await fetch(`${host}/list/${page}`);
     const jsonData=await response.json();
     return jsonData.data.items||[];
 }

@@ -5,7 +5,7 @@ module.exports = {
     //Get all items
     async getAllItems(req, res){
         try {
-            const results=await Query.getAllItems();
+            const results=await Query.getAllItems(req.params.page);
             res.status(200).json({
                 status: "success",
                 results: results.rows.length,
@@ -83,8 +83,8 @@ module.exports = {
     },
 
     async orderItem(req,res){
-        try {console.log("order ",req.body.orderId, req.body.itemId, req.body.amount)
-            const t=await Query.orderItem(req.body.orderId, req.body.itemId, req.body.amount);console.log("t ",t)
+        try {
+            await Query.orderItem(req.body.orderId, req.body.itemId, req.body.amount);
             res.status(200).json({
                 status: "succes",
             });

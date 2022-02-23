@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogTitle, List, ListItem, ListItemText, ListItemAvatar, Avatar } from "@mui/material";
+import { Button, Dialog, DialogTitle, List, ListItem, ListItemText, ListItemAvatar, Avatar, Container, TableContainer, Table, TableRow, TableCell, TableHead, TableBody, Paper, Grid } from "@mui/material";
 import React, {useState, useEffect} from "react";
 import { ordersList } from "../service/service";
 import {Link} from "react-router-dom";
@@ -24,26 +24,56 @@ const OrderedItems = (props)=>{
     },[])
 
     return(
-        <div>
+        <Container>
             <Button onClick={()=>openD()}>view items</Button>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>your order</DialogTitle>
-                <List>
+            <Dialog open={open} onClose={handleClose} maxWidth='sm' fullWidth='true'>
+                <DialogTitle>Order Details</DialogTitle>
+
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>{list.length} items</TableCell>
+                        <TableCell align="left">Quantity</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {list.map((item) => (
+                        <TableRow
+                          key={item.id}
+                          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                          <TableCell component="th" scope="row">
+                            <Link to={`/item/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
+                              <Grid container spacing={2} sx={{alignItems: 'center'}}>
+                                <Grid item sx={1}><Avatar src={item.picture}/></Grid>
+                                <Grid item >{item.name}</Grid>
+                              </Grid>
+                            </Link>
+                          </TableCell>
+                          <TableCell align="left">{item.amount}</TableCell>
+                          
+                          
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+
+                {/*<List>
                   {list.map((item)=>(
-                    <Link className="navbar-brand" to={`/item/${item.id}`}>
-                    <ListItem key={item.id}>
+                    <Link to={`/item/${item.id}`} style={{textDecoration: 'none'}}>
+                    <ListItem key={item.id} sx={{color: 'black'}}>
                       <img width={'50px'} src={`${item.picture}`}/>
                       <ListItemText sx={{padding: '10px'}}>{item.name}</ListItemText>
                       <ListItemText sx={{padding: '10px'}}>X {item.amount}</ListItemText>
                     </ListItem></Link>
                   ))}
-                </List>
+                  </List>*/}
 
-                {list.map((item)=>{
-                    <p>ppppp{item.name}</p>
-                })}
+                
             </Dialog>
-        </div>
+        </Container>
     )
 
 
