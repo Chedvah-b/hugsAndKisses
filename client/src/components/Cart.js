@@ -16,7 +16,6 @@ useEffect(() => {
        storeLocalStorage.push(JSON.parse(value));
     }
     setCartItems(storeLocalStorage);
-    setTotal(totalAmount());
     },[])
 
 
@@ -42,7 +41,7 @@ function totalAmount(){ return cartItems.reduce(
 }
 
 const checkIfLoggedIn=()=>{
-    if(userId===0){console.log("id===0");
+    if(userId===0){
         return false;
     }
     return true;
@@ -67,7 +66,21 @@ return(
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                         <TableCell component="th" scope="row">
-                            <Avatar src={item.picture} sx={{ width: 100, height: 100 }} variant="square"/>{item.name}{item.description}
+                            <Grid container spacing={2}>
+                                <Grid item>
+                                    <Avatar src={item.picture} sx={{ width: 100, height: 100 }} variant="square"/>
+                                </Grid>
+                                <Grid item xs container direction="column" spacing={2}>
+                                    <Grid item xs>
+                                        <Typography gutterBottom variant="subtitle1">
+                                            {item.name}
+                                        </Typography>
+                                        <Typography variant="body2" gutterBottom>
+                                            {item.description}
+                                        </Typography>
+                                    </Grid>  
+                                </Grid>
+                            </Grid>      
                         </TableCell>
                         <TableCell align="right">{item.price}</TableCell>
                         <TableCell align="right">{item.amount}</TableCell>
@@ -78,12 +91,12 @@ return(
                 </Table>
                 </TableContainer>
 
-                <Typography variant="h4">Total: {totalAmount()}</Typography>
+                <Typography variant="h4" sx={{my: '5px'}}>Total: {totalAmount()}</Typography>
             
                 {checkIfLoggedIn() ?
-                    <Link to="/check-out" style={{textDecoration: 'none'}}><Button>go to check out</Button></Link> 
+                    <Link to="/check-out" style={{textDecoration: 'none'}}><Button variant="outlined">go to check out</Button></Link> 
                     :
-                    <Link to="/login" style={{textDecoration: 'none'}}><Button>go to check out</Button></Link>}
+                    <Link to="/login" style={{textDecoration: 'none'}}><Button variant="outlined">go to check out</Button></Link>}
                  
        </Container>
     )

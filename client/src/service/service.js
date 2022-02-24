@@ -68,13 +68,13 @@ async function orderItem(orderId, itemId, amount){
 
 async function orders(userId){
     const response=await fetch(`${host}/orders/${userId}`);
-    const jsonData=await response.json();console.log("res ",jsonData.data);
+    const jsonData=await response.json();
     return jsonData.data.items||[];
 }
 
 async function ordersList(orderId){
     const response=await fetch(`${host}/ordersList/${orderId}`);
-    const jsonData=await response.json();console.log("res ",jsonData.data);
+    const jsonData=await response.json();
     return jsonData.data.items||[];
 }
 

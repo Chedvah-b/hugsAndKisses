@@ -12,7 +12,7 @@ const Orders=()=>{
     const options = { year: "numeric", month: "long", day: "numeric" }
 
     const getOrders = async()=>{
-        const result=await orders(userId);console.log("order ",result);
+        const result=await orders(userId);
         
         setItems(result);
         

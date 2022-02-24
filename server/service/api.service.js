@@ -37,7 +37,7 @@ module.exports = {
     //Add new customer
     async signUp(req,res){
         try {
-            const results=await Query.signUp(req.body.firstName, req.body.lastName, req.body.phone, req.body.email, req.body.password);
+            await Query.signUp(req.body.firstName, req.body.lastName, req.body.phone, req.body.email, req.body.password);
             res.status(200).json({
                 status: "succes",
               });
@@ -46,6 +46,7 @@ module.exports = {
         }
     },
 
+    //Log in
     async logIn(req,res){
         try {
             const results=await Query.logIn(req.params.email, req.params.password);
@@ -68,6 +69,7 @@ module.exports = {
         }
     },
 
+    //Checkout - update orders table
     async checkout(req,res){
         try {
             const results = await Query.checkout(req.body.userId, req.body.status, req.body.totalPrice);
@@ -82,6 +84,7 @@ module.exports = {
         }
     },
 
+    //Update orders_items table
     async orderItem(req,res){
         try {
             await Query.orderItem(req.body.orderId, req.body.itemId, req.body.amount);
@@ -93,9 +96,10 @@ module.exports = {
         }
     },
 
+    //View orders
     async getOrders(req,res){
         try {
-            const results=await Query.getOrders(req.params.id);//console.log("res ",results);
+            const results=await Query.getOrders(req.params.id);
             res.status(200).json({
                 status: "succes",
                 data: {
@@ -107,6 +111,7 @@ module.exports = {
         }
     },
 
+    //View items in order
     async getOrdersList(req,res){
         try {
             const results=await Query.getOrdersList(req.params.id);

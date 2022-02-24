@@ -45,35 +45,9 @@ const LogIn=()=>{
             <TextField variant="standard" label="Password" type="password" fullWidth onChange={(e)=>{setPassword(e.target.value)}}/>
             <Button onClick={()=>checkDetails()}>Log in</Button>
         </Box>
-        {/*<Button variant="light" onClick={handleShow}>Sign in</Button>
-
-        <Offcanvas show={show} onHide={handleClose} placement="end" name="end">
-            <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Returning customer</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-                <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control onBlur={(e)=>{setEmail(e.target.value)}} type="email" placeholder="Enter email" />
-                        
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control onBlur={(e)=>{setPassword(e.target.value)}} type="password" placeholder="Password" />
-                    </Form.Group>
-                    
-                    <Button onClick={()=>checkDetails()} variant="dark">Sign in</Button>
-                </Form>
-                <br/>
-                <h5>New customer</h5>
-                
-                <SignUp handleClose={handleClose}/>
-            </Offcanvas.Body>
-    </Offcanvas>*/}
-    {/*</div>*/}
+        
     </Container>
+    
     )
 }
 

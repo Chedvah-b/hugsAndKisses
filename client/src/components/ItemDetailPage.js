@@ -10,7 +10,7 @@ import { useState } from "react";
 const ItemDetailPage=()=>{
     const {id}=useParams();
     const {selectedItem,setSelectedItem}=useContext(ItemsContext);
-    //const {total,setTotal}=useContext(ItemsContext);
+    const {total,setTotal}=useContext(ItemsContext);
     const {cartItems,setCartItems} = useContext(ItemsContext);
     const [amount,setAmount] = useState(1);
 
@@ -19,10 +19,11 @@ const ItemDetailPage=()=>{
         var key={id}.id;
         if(JSON.parse(localStorage.getItem(key))){
             var item = JSON.parse(localStorage.getItem(key)).amount;
-            //setTotal(prev=>prev+selectedItem.price);
+            setTotal(prev=>prev+(selectedItem.price*amount));
             localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":item+amount,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
-        else{//setTotal(prev=>prev+selectedItem.price);
+        else{
+            setTotal(prev=>prev+(selectedItem.price*amount));
             localStorage.setItem(key, JSON.stringify({"id":selectedItem.id,"amount":amount,"picture":selectedItem.picture,"name":selectedItem.name,"price":selectedItem.price,"description":selectedItem.description}));
         }
         setCartItems([...cartItems,localStorage.getItem(key)]);
@@ -67,27 +68,6 @@ const ItemDetailPage=()=>{
                             </Grid>
 
                         </Grid>
-                        
-                        {/*<FormControl sx={{width: '50%'}}>
-                            <InputLabel>Select Amount</InputLabel>
-                            <Select
-                                label="Select Amount"
-                                onChange={()=>{}}
-                            >
-                                
-                                <MenuItem value={1}>1</MenuItem>
-                                <MenuItem value={2}>2</MenuItem>
-                                <MenuItem value={3}>3</MenuItem>
-                                <MenuItem value={4}>4</MenuItem>
-                                <MenuItem value={5}>5</MenuItem>
-                                <MenuItem value={6}>6</MenuItem>
-                                <MenuItem value={7}>7</MenuItem>
-                                <MenuItem value={8}>8</MenuItem>
-                                <MenuItem value={9}>9</MenuItem>
-                                <MenuItem value={10}>10</MenuItem>
-                            </Select>
-    </FormControl>*/}
-                        
                         <Typography sx={{pt: '5px', width: '400px'}}>Product info
                             <br />
                             {selectedItem.description}

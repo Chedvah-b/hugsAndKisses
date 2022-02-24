@@ -15,17 +15,16 @@ const CheckOut=()=>{
     const {userId,setUserId}=useContext(ItemsContext);
    
     const submit = async() =>{
-        const orderId=await checkout(userId, 'new', Number(total));console.log("i ",orderId);
+        const orderId=await checkout(userId, 'new', Number(total));
         for (const [key, value] of Object.entries(localStorage)) {
             await orderItem(orderId, JSON.parse(value).id, JSON.parse(value).amount);
         }
         localStorage.clear();
+        setTotal(0);
     }
     
     return(
         <Container>
-            
-
             <Box component= "form" sx={{m: '10px'}}>
                 <Typography variant="h5">Billing Address</Typography>
                 <TextField variant="standard" label="First Name" type="text" fullWidth required onChange={(e)=>{setFirstName(e.target.value)}}/>
