@@ -34,7 +34,7 @@ const List=()=>{
             
             <div className="container" style={{width:"30%", paddingBottom: '2.5rem'}}>
                 <div className="d-flex">
-                    <input  className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <input onChange={(e)=>{setSearch(e.target.value)}} className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                 </div>
             </div>
             <Grid container spacing={2}>
